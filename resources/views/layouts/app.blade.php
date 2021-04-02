@@ -58,7 +58,11 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">My link</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('alumnos.index') }}">Alumnos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Consultas</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Medicamentos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Médico</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Reporte</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
