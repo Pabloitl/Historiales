@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -61,8 +62,8 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('alumnos.index') }}">Alumnos</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Consultas</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Medicamentos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Médico</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Reporte</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Médicos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Reportes</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
