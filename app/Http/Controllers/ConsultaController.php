@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alumno;
+use App\Models\Consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class AlumnoController extends Controller
+class ConsultaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return View::make('alumno.lista')
-            ->with('records', Alumno::all());
+        return View::make('consulta.lista')
+            ->with('records', Consulta::all());
     }
 
     /**
@@ -26,7 +26,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return View::make('alumno.form');
+        return View::make('consulta.form');
     }
 
     /**
@@ -37,14 +37,15 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        Alumno::create([
+        Consulta::create([
             'no_control' => $request['No_Control'],
-            'nombre' => $request['Nombre'],
-            'sexo' => $request['Sexo'],
-            'carrera' => $request['Carrera']
+            'cedula' => $request['Cedula'],
+            'fecha_consulta' => $request['Fecha_consulta'],
+            'descripcion' => $request['Descripcion'],
+            'cod_m' => $request['Cod_M']
         ]);
 
-        return redirect('/alumnos');
+        return redirect('/consultas');
     }
 
     /**
@@ -55,8 +56,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        return View::make('alumno.show')
-            ->with('record', Alumno::find($id));
+        return View::make('consulta.show')
+            ->with('record', Consulta::find($id));
     }
 
     /**
@@ -67,8 +68,8 @@ class AlumnoController extends Controller
      */
     public function edit($id)
     {
-        return View::make('alumno.form')
-            ->with('record', Alumno::find($id));
+        return View::make('consulta.form')
+            ->with('record', Consulta::find($id));
     }
 
     /**
@@ -80,16 +81,17 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $alumno = Alumno::find($id);
+        $consulta = Consulta::find($id);
 
-        $alumno->no_control = $request['No_Control'];
-        $alumno->nombre = $request['Nombre'];
-        $alumno->sexo = $request['Sexo'];
-        $alumno->carrera = $request['Carrera'];
+        $consulta->no_control = $request['No_Control'];
+        $consulta->cedula = $request['Cedula'];
+        $consulta->fecha_consulta = $request['Fecha_consulta'];
+        $consulta->descripcion = $request['Descripcion'];
+        $consulta->cod_m = $request['Cod_M'];
 
-        $alumno->save();
+        $consulta->save();
 
-        return redirect('/alumnos');
+        return redirect('/consultas');
     }
 
     /**
@@ -100,8 +102,8 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        Alumno::find($id)->delete();
+        Consulta::find($id)->delete();
 
-        return redirect('/alumnos');
+        return redirect('/consultas');
     }
 }

@@ -7,9 +7,9 @@
 
     <div class="text-center mt-5">
         <a href="{{ route('alumnos.index') }}"><button class="btn btn-secondary">Alumnos</button></a>
-        <a href="{{ route('alumnos.index') }}"><button class="btn btn-secondary">Médicos</button></a>
-        <a href="{{ route('alumnos.index') }}"><button class="btn btn-secondary">Medicamentos</button></a>
-        <a href="{{ route('alumnos.index') }}"><button class="btn btn-secondary">Consultas</button></a>
+        <a href="{{ route('medicos.index') }}"><button class="btn btn-secondary">Médicos</button></a>
+        <a href="{{ route('medicamentos.index') }}"><button class="btn btn-secondary">Medicamentos</button></a>
+        <a href="{{ route('consultas.index') }}"><button class="btn btn-secondary">Consultas</button></a>
         <a href="{{ route('alumnos.index') }}"><button class="btn btn-secondary">Reportes</button></a>
     </div>
 @endsection

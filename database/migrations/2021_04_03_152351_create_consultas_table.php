@@ -18,8 +18,8 @@ class CreateConsultasTable extends Migration
             $table->unsignedInteger('no_control');
             $table->unsignedInteger('cedula');
             $table->date('fecha_consulta');
-            $table->string('descripcion', 80);
-            $table->string('cod_m', 8);
+            $table->string('descripcion', 120);
+            $table->unsignedInteger('cod_m');
 
             $table->foreign('no_control')->references('no_control')->on('alumnos');
             $table->foreign('cedula')->references('cedula')->on('medicos');

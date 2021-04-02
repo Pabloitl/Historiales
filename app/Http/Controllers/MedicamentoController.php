@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alumno;
+use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class AlumnoController extends Controller
+class MedicamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return View::make('alumno.lista')
-            ->with('records', Alumno::all());
+        return View::make('medicamento.lista')
+            ->with('records', Medicamento::all());
     }
 
     /**
@@ -26,7 +26,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return View::make('alumno.form');
+        return View::make('medicamento.form');
     }
 
     /**
@@ -37,14 +37,13 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        Alumno::create([
-            'no_control' => $request['No_Control'],
+        Medicamento::create([
+            'cod_m' => $request['Cod_M'],
             'nombre' => $request['Nombre'],
-            'sexo' => $request['Sexo'],
-            'carrera' => $request['Carrera']
+            'cantidad' => $request['Cantidad']
         ]);
 
-        return redirect('/alumnos');
+        return redirect('/medicamentos');
     }
 
     /**
@@ -55,8 +54,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        return View::make('alumno.show')
-            ->with('record', Alumno::find($id));
+        return View::make('medicamento.show')
+            ->with('record', Medicamento::find($id));
     }
 
     /**
@@ -67,8 +66,8 @@ class AlumnoController extends Controller
      */
     public function edit($id)
     {
-        return View::make('alumno.form')
-            ->with('record', Alumno::find($id));
+        return View::make('medicamento.form')
+            ->with('record', Medicamento::find($id));
     }
 
     /**
@@ -80,16 +79,15 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $alumno = Alumno::find($id);
+        $medicamento = Medicamento::find($id);
 
-        $alumno->no_control = $request['No_Control'];
-        $alumno->nombre = $request['Nombre'];
-        $alumno->sexo = $request['Sexo'];
-        $alumno->carrera = $request['Carrera'];
+        $medicamento->cod_m = $request['Cod_M'];
+        $medicamento->nombre = $request['Nombre'];
+        $medicamento->cantidad = $request['Cantidad'];
 
-        $alumno->save();
+        $medicamento->save();
 
-        return redirect('/alumnos');
+        return redirect('/medicamentos');
     }
 
     /**
@@ -100,8 +98,8 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        Alumno::find($id)->delete();
+        Medicamento::find($id)->delete();
 
-        return redirect('/alumnos');
+        return redirect('/medicamentos');
     }
 }

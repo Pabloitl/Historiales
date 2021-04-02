@@ -60,9 +60,9 @@
                             @endif
                         @else
                             <li class="nav-item"><a class="nav-link" href="{{ route('alumnos.index') }}">Alumnos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Consultas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Medicamentos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Médicos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('medicos.index') }}">Médicos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('medicamentos.index') }}">Medicamentos</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('consultas.index') }}">Consultas</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Reportes</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

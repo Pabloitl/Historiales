@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alumno;
+use App\Models\Medico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class AlumnoController extends Controller
+class MedicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        return View::make('alumno.lista')
-            ->with('records', Alumno::all());
+        return View::make('medico.lista')
+            ->with('records', Medico::all());
     }
 
     /**
@@ -26,7 +26,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return View::make('alumno.form');
+        return View::make('medico.form');
     }
 
     /**
@@ -37,14 +37,13 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        Alumno::create([
-            'no_control' => $request['No_Control'],
+        Medico::create([
+            'cedula' => $request['Cedula'],
             'nombre' => $request['Nombre'],
-            'sexo' => $request['Sexo'],
-            'carrera' => $request['Carrera']
+            'campus' => $request['Campus']
         ]);
 
-        return redirect('/alumnos');
+        return redirect('/medicos');
     }
 
     /**
@@ -55,8 +54,8 @@ class AlumnoController extends Controller
      */
     public function show($id)
     {
-        return View::make('alumno.show')
-            ->with('record', Alumno::find($id));
+        return View::make('medico.show')
+            ->with('record', Medico::find($id));
     }
 
     /**
@@ -67,8 +66,8 @@ class AlumnoController extends Controller
      */
     public function edit($id)
     {
-        return View::make('alumno.form')
-            ->with('record', Alumno::find($id));
+        return View::make('medico.form')
+            ->with('record', Medico::find($id));
     }
 
     /**
@@ -80,16 +79,15 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $alumno = Alumno::find($id);
+        $medico = Medico::find($id);
 
-        $alumno->no_control = $request['No_Control'];
-        $alumno->nombre = $request['Nombre'];
-        $alumno->sexo = $request['Sexo'];
-        $alumno->carrera = $request['Carrera'];
+        $medico->cedula = $request['Cedula'];
+        $medico->nombre = $request['Nombre'];
+        $medico->campus = $request['Campus'];
 
-        $alumno->save();
+        $medico->save();
 
-        return redirect('/alumnos');
+        return redirect('/medicos');
     }
 
     /**
@@ -100,8 +98,8 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        Alumno::find($id)->delete();
+        Medico::find($id)->delete();
 
-        return redirect('/alumnos');
+        return redirect('/medicos');
     }
 }
