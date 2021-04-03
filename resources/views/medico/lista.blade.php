@@ -3,8 +3,14 @@
 @section('content')
     <h2 class="text-center">Lista Médicos</h2>
 
-    <a href="{{ route('medicos.create') }}"><button class="btn btn-primary btn-block">Nuevo</button></a>
+    <div style="text-align: center;" class="mb-3">
+        <div style="width: 40%; display: inline-block;">
+            <a href="{{ route('medicos.create') }}"><button class="btn btn-primary btn-block">Nuevo</button></a>
+        </div>
+    </div>
 
+    <div style="text-align: center;">
+        <div style="width: 50%; display: inline-block;">
     <table class="table">
         <tr>
             <th>Cédula</th>
@@ -19,4 +25,6 @@
             </tr>
         @endforeach
     </table>
+        </div>
+    </div>
 @endsection

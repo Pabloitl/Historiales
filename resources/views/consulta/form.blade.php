@@ -3,6 +3,8 @@
 @section('content')
     <h2 class="text-center">Consulta</h2>
 
+    <div style="text-align: center;">
+        <div style="width: 50%; display: inline-block;">
     <form action="{{ url('consultas/' . ($record['no_consulta'] ?? '')) }}" method="POST">
         @if (isset($record))
             @method('PATCH')
@@ -48,7 +50,7 @@
         </div>
         <div class="form-group">
             <label for="Fecha_consulta">Fecha de Consulta:</label>
-            <input type="date" class="form-control" id="Fecha_consulta" name="Fecha_consulta" value="{{ $record['fecha_consulta'] ?? Carbon\Carbon::now()->toDateString() }}">
+            <input type="date" class="form-control" id="Fecha_consulta" name="Fecha_consulta" value="{{ $record['fecha_consulta'] ?? today()->toDateString() }}">
         </div>
         <div class="form-group">
             <label for="Descripcion">Descripción:</label>
@@ -68,8 +70,10 @@
                 @endforeach
             </select>
         </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-success btn-block">Enviar</button>
+        <div style="text-align: center;" class="mt-3">
+            <div style="width: 40%; display: inline-block;">
+                <button type="submit" class="btn btn-success btn-block">Enviar</button>
+            </div>
         </div>
     </form>
 
@@ -78,9 +82,13 @@
             @method('DELETE')
 
             @csrf
-            <div class="text-center">
-                <button type="submit" class="btn btn-danger btn-block">Eliminar</button>
+            <div style="text-align: center;" class="mt-3">
+                <div style="width: 40%; display: inline-block;">
+                    <button type="submit" class="btn btn-danger btn-block">Eliminar</button>
+                </div>
             </div>
         </form>
     @endisset
+        </div>
+    </div>
 @endsection

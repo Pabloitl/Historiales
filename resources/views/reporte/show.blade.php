@@ -7,6 +7,8 @@
 @section('content')
     <h2 class="text-center">Reporte</h2>
 
+    <div style="text-align: center;">
+        <div style="width: 50%; display: inline-block;">
     <div class="form-group">
         <label for="Fecha_inicial">Fecha inicial:</label>
         <input readonly type="date" class="form-control" id="Fecha_inicial" name="Fecha_inicial" value="{{ $request->fecha_inicial }}">
@@ -14,6 +16,8 @@
     <div class="form-group">
         <label for="Fecha_final">Fecha final:</label>
         <input readonly type="date" class="form-control" id="Fecha_final" name="Fecha_final" value="{{ $request->fecha_final }}">
+    </div>
+        </div>
     </div>
 
     <div style="text-align: center;">

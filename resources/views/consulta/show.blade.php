@@ -3,6 +3,8 @@
 @section('content')
     <h2 class="text-center">Consulta</h2>
 
+    <div style="text-align: center;">
+        <div style="width: 50%; display: inline-block;">
     <div class="form-group">
             <label for="No_Consulta">Numero Consulta:</label>
             <input readonly class="form-control" id="No_Consulta" name="No_Consulta" value="{{ $record['no_consulta'] ?? '' }}">
@@ -28,5 +30,11 @@
         <input readonly type="text" class="form-control" id="Cod_M" name="Cod_M" value="{{ $medicamento['nombre'] ?? '' }}">
     </div>
 
-    <a class="btn btn-primary btn-block" href="{{ route('consultas.edit', ['consulta' => $record['no_consulta']]) }}">Editar</a>
+    <div style="text-align: center;" class="mt-3">
+        <div style="width: 40%; display: inline-block;">
+            <a class="btn btn-primary btn-block" href="{{ route('consultas.edit', ['consulta' => $record['no_consulta']]) }}">Editar</a>
+        </div>
+    </div>
+        </div>
+    </div>
 @endsection
