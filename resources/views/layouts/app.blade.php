@@ -78,6 +78,9 @@
                             @can('ver reportes')
                                 <li class="nav-item"><a class="nav-link" href="{{ route('reportes.index') }}">Reportes</a></li>
                             @endcan
+                            @can('manipular roles')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

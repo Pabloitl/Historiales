@@ -5,6 +5,7 @@ use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
     Route::post('/reportes', [ReporteController::class, 'show'])->name('reportes.show');
+
+    Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::post('/roles', [RoleController::class, 'changeRole'])->name('roles.show');
 });

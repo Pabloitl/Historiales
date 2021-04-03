@@ -23,5 +23,6 @@ class Roles extends Seeder
         Permission::create(['name' => 'manipular medicos'])->assignRole('Administrador');
         Permission::create(['name' => 'manipular consultas'])->assignRole('Medico');
         Permission::create(['name' => 'ver reportes'])->assignRole('Administrador');
+        Permission::create(['name' => 'manipular roles'])->assignRole('Administrador');
     }
 }
