@@ -31,12 +31,16 @@
                     <select id="pet-select" class="form-control" name="Sexo" value="{{ $record['sexo'] ?? '' }}">
                         <option value="Hombre"
                             @isset($record)
-                                ($record == "Hombre") ? selected
+                                @if($record->sexo == "Hombre")
+                                    selected
+                                @endif
                             @endisset
                         >Hombre</option>
                         <option value="Mujer"
                             @isset($record)
-                                ($record == "Mujer") ? selected
+                                @if($record->sexo == "Mujer")
+                                    selected
+                                @endif
                             @endisset
                         >Mujer</option>
                     </select>

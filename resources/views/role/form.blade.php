@@ -45,6 +45,26 @@
                     </div>
                 </div>
             </form>
+            <table class="table mt-5">
+                <tr>
+                    <th>Email</th>
+                    @foreach($roles as $role)
+                        <th>{{ $role->name }}</th>
+                    @endforeach
+                </tr>
+                @foreach($usuarios as $item)
+                    <tr>
+                    <td>{{ $item->email }}</td>
+                    @foreach($roles as $role)
+                        <td><input type="checkbox" class="form-check-box" disabled
+                            @if($item->hasRole($role->name))
+                                checked
+                            @endif
+                        ></td>
+                    @endforeach
+                    </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 @endsection
