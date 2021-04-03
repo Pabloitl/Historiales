@@ -70,7 +70,7 @@ class AlumnoController extends Controller
     public function show($id)
     {
         return View::make('alumno.show')
-            ->with('record', Alumno::find($id));
+            ->with('record', Alumno::findOrFail($id));
     }
 
     /**
@@ -82,7 +82,7 @@ class AlumnoController extends Controller
     public function edit($id)
     {
         return View::make('alumno.form')
-            ->with('record', Alumno::find($id));
+            ->with('record', Alumno::findOrFail($id));
     }
 
     /**

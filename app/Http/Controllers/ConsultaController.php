@@ -75,7 +75,7 @@ class ConsultaController extends Controller
      */
     public function show($id)
     {
-        $consulta = Consulta::find($id);
+        $consulta = Consulta::findOrFail($id);
 
         return View::make('consulta.show')
             ->with('record', $consulta)
@@ -92,7 +92,7 @@ class ConsultaController extends Controller
     public function edit($id)
     {
         return View::make('consulta.form')
-            ->with('record', Consulta::find($id))
+            ->with('record', Consulta::findOrFail($id))
             ->with('alumnos', Alumno::all('no_control'))
             ->with('medicos', Medico::all('cedula', 'nombre'))
             ->with('medicamentos', Medicamento::all('cod_m', 'nombre'));

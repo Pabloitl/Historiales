@@ -68,7 +68,7 @@ class MedicoController extends Controller
     public function show($id)
     {
         return View::make('medico.show')
-            ->with('record', Medico::find($id));
+            ->with('record', Medico::findOrFail($id));
     }
 
     /**
@@ -80,7 +80,7 @@ class MedicoController extends Controller
     public function edit($id)
     {
         return View::make('medico.form')
-            ->with('record', Medico::find($id));
+            ->with('record', Medico::findOrFail($id));
     }
 
     /**

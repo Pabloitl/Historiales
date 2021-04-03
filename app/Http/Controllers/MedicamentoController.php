@@ -67,7 +67,7 @@ class MedicamentoController extends Controller
     public function show($id)
     {
         return View::make('medicamento.show')
-            ->with('record', Medicamento::find($id));
+            ->with('record', Medicamento::findOrFail($id));
     }
 
     /**
@@ -79,7 +79,7 @@ class MedicamentoController extends Controller
     public function edit($id)
     {
         return View::make('medicamento.form')
-            ->with('record', Medicamento::find($id));
+            ->with('record', Medicamento::findOrFail($id));
     }
 
     /**
