@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alumno;
 use App\Models\Consulta;
+use App\Models\Medicamento;
+use App\Models\Medico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class ConsultaController extends Controller
 {
+    /**
+     * @param
+     */
+    public function __construct()
+    {
+        $this->middleware('can:manipular consultas');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +37,10 @@ class ConsultaController extends Controller
      */
     public function create()
     {
-        return View::make('consulta.form');
+        return View::make('consulta.form')
+            ->with('alumnos', Alumno::all('no_control'))
+            ->with('medicos', Medico::all('cedula', 'nombre'))
+            ->with('medicamentos', Medicamento::all('cod_m', 'nombre'));
     }
 
     /**
@@ -56,8 +70,12 @@ class ConsultaController extends Controller
      */
     public function show($id)
     {
+        $consulta = Consulta::find($id);
+
         return View::make('consulta.show')
-            ->with('record', Consulta::find($id));
+            ->with('record', $consulta)
+            ->with('medico', Medico::find($consulta->cedula))
+            ->with('medicamento', Medicamento::find($consulta->cod_m));
     }
 
     /**
@@ -69,7 +87,10 @@ class ConsultaController extends Controller
     public function edit($id)
     {
         return View::make('consulta.form')
-            ->with('record', Consulta::find($id));
+            ->with('record', Consulta::find($id))
+            ->with('alumnos', Alumno::all('no_control'))
+            ->with('medicos', Medico::all('cedula', 'nombre'))
+            ->with('medicamentos', Medicamento::all('cod_m', 'nombre'));
     }
 
     /**

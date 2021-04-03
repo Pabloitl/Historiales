@@ -4,6 +4,7 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,7 @@ Route::middleware('auth')->group(function () {
         'medicos' => MedicoController::class,
         'consultas' => ConsultaController::class
     ]);
+
+    Route::get('/reportes', [ReporteController::class, 'index'])->name('reportes.index');
+    Route::post('/reportes', [ReporteController::class, 'show'])->name('reportes.show');
 });

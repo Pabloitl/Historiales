@@ -19,6 +19,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('header')
 </head>
 <body>
     <div id="app">
@@ -26,10 +28,12 @@
             <div class="container">
                 @guest
                     <a class="navbar-brand" href="{{ url('/') }}">
+                        <img class="rounded" width="20px" src="https://www.itleon.edu.mx/itl-logo.jpg" alt="Historiales Médicos">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 @else
                     <a class="navbar-brand" href="{{ url('/home') }}">
+                        <img class="rounded" width="20px" src="https://www.itleon.edu.mx/itl-logo.jpg" alt="Historiales Médicos">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 @endguest
@@ -59,11 +63,21 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('alumnos.index') }}">Alumnos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('medicos.index') }}">Médicos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('medicamentos.index') }}">Medicamentos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('consultas.index') }}">Consultas</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('welcome') }}">Reportes</a></li>
+                            @can('manipular alumnos')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('alumnos.index') }}">Alumnos</a></li>
+                            @endcan
+                            @can('manipular medicos')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('medicos.index') }}">Médicos</a></li>
+                            @endcan
+                            @can('manipular medicamentos')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('medicamentos.index') }}">Medicamentos</a></li>
+                            @endcan
+                            @can('manipular consultas')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('consultas.index') }}">Consultas</a></li>
+                            @endcan
+                            @can('ver reportes')
+                                <li class="nav-item"><a class="nav-link" href="{{ route('reportes.index') }}">Reportes</a></li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

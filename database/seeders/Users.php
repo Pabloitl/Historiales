@@ -15,10 +15,16 @@ class Users extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'test',
-            'email' => 'test@test.com',
-            'password' => bcrypt('test')
-        ]);
+            'name' => 'medico',
+            'email' => 'medico@test.com',
+            'password' => bcrypt('password')
+        ])->assignRole('Medico');
+
+        User::create([
+            'name' => 'admin',
+            'email' => 'admin@test.com',
+            'password' => bcrypt('password')
+        ])->assignRole('Administrador');
 
         User::factory(10)->create();
     }

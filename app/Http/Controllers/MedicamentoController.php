@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\View;
 class MedicamentoController extends Controller
 {
     /**
+     * @param
+     */
+    public function __construct()
+    {
+        $this->middleware('can:manipular medicamentos');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
