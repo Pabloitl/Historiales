@@ -13,5 +13,5 @@ class Medicamento extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['cod_m', 'nombre', 'cantidad'];
+    protected $fillable = ['cod_m', 'nombre'];
 }

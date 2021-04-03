@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Alumno;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -45,12 +46,17 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        Alumno::create([
-            'no_control' => $request['No_Control'],
-            'nombre' => $request['Nombre'],
-            'sexo' => $request['Sexo'],
-            'carrera' => $request['Carrera']
-        ]);
+        try {
+            Alumno::create([
+                'no_control' => $request['No_Control'],
+                'nombre' => $request['Nombre'],
+                'sexo' => $request['Sexo'],
+                'carrera' => $request['Carrera']
+            ]);
+
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/alumnos');
     }
@@ -95,7 +101,11 @@ class AlumnoController extends Controller
         $alumno->sexo = $request['Sexo'];
         $alumno->carrera = $request['Carrera'];
 
-        $alumno->save();
+        try {
+            $alumno->save();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/alumnos');
     }
@@ -108,7 +118,11 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        Alumno::find($id)->delete();
+        try {
+            Alumno::find($id)->delete();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/alumnos');
     }

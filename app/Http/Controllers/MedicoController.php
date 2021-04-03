@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medico;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -45,11 +46,15 @@ class MedicoController extends Controller
      */
     public function store(Request $request)
     {
-        Medico::create([
-            'cedula' => $request['Cedula'],
-            'nombre' => $request['Nombre'],
-            'campus' => $request['Campus']
-        ]);
+        try {
+            Medico::create([
+                'cedula' => $request['Cedula'],
+                'nombre' => $request['Nombre'],
+                'campus' => $request['Campus']
+            ]);
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicos');
     }
@@ -93,7 +98,11 @@ class MedicoController extends Controller
         $medico->nombre = $request['Nombre'];
         $medico->campus = $request['Campus'];
 
-        $medico->save();
+        try {
+            $medico->save();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicos');
     }
@@ -106,7 +115,11 @@ class MedicoController extends Controller
      */
     public function destroy($id)
     {
-        Medico::find($id)->delete();
+        try {
+            Medico::find($id)->delete();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicos');
     }

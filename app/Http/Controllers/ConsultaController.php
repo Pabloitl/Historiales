@@ -6,6 +6,7 @@ use App\Models\Alumno;
 use App\Models\Consulta;
 use App\Models\Medicamento;
 use App\Models\Medico;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -51,13 +52,17 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
-        Consulta::create([
-            'no_control' => $request['No_Control'],
-            'cedula' => $request['Cedula'],
-            'fecha_consulta' => $request['Fecha_consulta'],
-            'descripcion' => $request['Descripcion'],
-            'cod_m' => $request['Cod_M']
-        ]);
+        try {
+            Consulta::create([
+                'no_control' => $request['No_Control'],
+                'cedula' => $request['Cedula'],
+                'fecha_consulta' => $request['Fecha_consulta'],
+                'descripcion' => $request['Descripcion'],
+                'cod_m' => $request['Cod_M']
+            ]);
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/consultas');
     }
@@ -110,7 +115,11 @@ class ConsultaController extends Controller
         $consulta->descripcion = $request['Descripcion'];
         $consulta->cod_m = $request['Cod_M'];
 
-        $consulta->save();
+        try {
+            $consulta->save();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/consultas');
     }
@@ -123,7 +132,11 @@ class ConsultaController extends Controller
      */
     public function destroy($id)
     {
-        Consulta::find($id)->delete();
+        try {
+            Consulta::find($id)->delete();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/consultas');
     }

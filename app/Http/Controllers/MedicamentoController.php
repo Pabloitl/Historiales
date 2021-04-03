@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -45,11 +46,14 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        Medicamento::create([
-            'cod_m' => $request['Cod_M'],
-            'nombre' => $request['Nombre'],
-            'cantidad' => $request['Cantidad']
-        ]);
+        try {
+            Medicamento::create([
+                'cod_m' => $request['Cod_M'],
+                'nombre' => $request['Nombre'],
+            ]);
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicamentos');
     }
@@ -91,9 +95,12 @@ class MedicamentoController extends Controller
 
         $medicamento->cod_m = $request['Cod_M'];
         $medicamento->nombre = $request['Nombre'];
-        $medicamento->cantidad = $request['Cantidad'];
 
-        $medicamento->save();
+        try {
+            $medicamento->save();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicamentos');
     }
@@ -106,7 +113,11 @@ class MedicamentoController extends Controller
      */
     public function destroy($id)
     {
-        Medicamento::find($id)->delete();
+        try {
+            Medicamento::find($id)->delete();
+        } catch (Exception $e) {
+            return View::make('error')->with('error', $e->getMessage());
+        }
 
         return redirect('/medicamentos');
     }
