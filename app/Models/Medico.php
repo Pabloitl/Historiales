@@ -13,5 +13,9 @@ class Medico extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['cedula', 'nombre', 'campus'];
+    protected $fillable = [
+        'cedula',
+        'nombre',
+        'campus'
+    ];
 }

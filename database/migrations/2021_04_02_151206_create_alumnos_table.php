@@ -14,10 +14,10 @@ class CreateAlumnosTable extends Migration
     public function up()
     {
         Schema::create('alumnos', function (Blueprint $table) {
-            $table->unsignedInteger('no_control')->primary();
-            $table->string('nombre', 50);
-            $table->string('sexo', 15);
-            $table->string('carrera', 30);
+            $table->string('no_control')->primary();
+            $table->string('nombre');
+            $table->string('sexo');
+            $table->string('carrera');
         });
     }
 

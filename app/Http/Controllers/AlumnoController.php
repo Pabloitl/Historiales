@@ -46,6 +46,7 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateForm($request);
         try {
             Alumno::create([
                 'no_control' => $request['No_Control'],
@@ -94,6 +95,7 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateFormUpdate($request);
         $alumno = Alumno::find($id);
 
         $alumno->no_control = $request['No_Control'];
@@ -125,5 +127,21 @@ class AlumnoController extends Controller
         }
 
         return redirect('/alumnos');
+    }
+
+    private function validateForm($request) {
+        $request->validate([
+            'No_Control' => 'string|required|unique:alumnos',
+            'Nombre' => 'string|required',
+            'Carrera' => 'string|required'
+        ]);
+    }
+
+    private function validateFormUpdate($request) {
+        $request->validate([
+            'No_Control' => 'string|required',
+            'Nombre' => 'string|required',
+            'Carrera' => 'string|required'
+        ]);
     }
 }

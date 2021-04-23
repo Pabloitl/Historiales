@@ -5,6 +5,15 @@
 
     <div style="text-align: center;">
         <div style="width: 50%; display: inline-block;">
+            @if ($errors->any())
+                <div class="alert alert-danger" style="text-align: left;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <form action="{{ url('consultas/' . ($record['no_consulta'] ?? '')) }}" method="POST">
         @if (isset($record))
             @method('PATCH')
@@ -60,9 +69,9 @@
             <label for="Cod_M">Medicamento:</label>
             <select id="pet-select" class="form-control" name="Cod_M" value="{{ $record['cod_m'] ?? '' }}">
                 @foreach ($medicamentos as $medicamento)
-                    <option value="{{ $medicamento->cod_m }}"
+                    <option value="{{ $medicamento->nombre }}"
                         @isset($record)
-                            @if($medicamento->cod_m == $record->cod_m)
+                            @if($medicamento->nombre == $record['cod_m'])
                                 selected
                             @endif
                         @endisset

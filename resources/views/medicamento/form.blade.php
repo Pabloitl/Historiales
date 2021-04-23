@@ -5,7 +5,16 @@
 
     <div style="text-align: center;">
         <div style="width: 50%; display: inline-block;">
-    <form action="{{ url('medicamentos/' . ($record['cod_m'] ?? '')) }}" method="POST">
+            @if ($errors->any())
+                <div class="alert alert-danger" style="text-align: left;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+    <form action="{{ url('medicamentos/' . ($record['nombre'] ?? '')) }}" method="POST">
         @if (isset($record))
             @method('PATCH')
         @else
@@ -15,17 +24,19 @@
         @csrf
 
         <div class="form-group">
-            <label for="Cod_M">Código medicamento:</label>
-            <input type="number" class="form-control" id="Cod_M" name="Cod_M" value="{{ $record['cod_m'] ?? '' }}"
+            <label for="Nombre">Nombre:</label>
+            <input type="text" class="form-control" id="Nombre" name="Nombre" value="{{ $record['nombre'] ?? '' }}"
             @isset($record)
                 readonly
-            @endisset>
+            @endisset
+            >
         </div>
 
         <div class="form-group">
-            <label for="Nombre">Nombre:</label>
-            <input type="text" class="form-control" id="Nombre" name="Nombre" value="{{ $record['nombre'] ?? '' }}">
+            <label for="Cantidad">Cantidad:</label>
+            <input type="number" class="form-control" id="Cantidad" name="Cantidad" value="{{ $record['cantidad'] ?? '' }}">
         </div>
+
         <div style="text-align: center;" class="mt-3">
             <div style="width: 40%; display: inline-block;">
                 <button type="submit" class="btn btn-success btn-block">Enviar</button>
@@ -33,7 +44,7 @@
         </div>
     </form>
     @isset($record)
-        <form action="{{ route('medicamentos.destroy', ['medicamento' => $record['cod_m']]) }}" method="POST">
+        <form action="{{ route('medicamentos.destroy', ['medicamento' => $record['nombre']]) }}" method="POST">
             @method('DELETE')
 
             @csrf

@@ -8,6 +8,7 @@ use App\Models\Medicamento;
 use App\Models\Medico;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class ConsultaController extends Controller
@@ -40,8 +41,8 @@ class ConsultaController extends Controller
     {
         return View::make('consulta.form')
             ->with('alumnos', Alumno::all('no_control'))
-            ->with('medicos', Medico::all('cedula', 'nombre'))
-            ->with('medicamentos', Medicamento::all('cod_m', 'nombre'));
+            ->with('medicos', Medico::where('nombre', Auth::user()->name)->get())
+            ->with('medicamentos', Medicamento::where('cantidad', '>', '0')->select('nombre')->get());
     }
 
     /**
@@ -52,6 +53,9 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateForm($request);
+
+        $this->consumeMedicamento($request['Cod_M']);
         try {
             Consulta::create([
                 'no_control' => $request['No_Control'],
@@ -95,7 +99,9 @@ class ConsultaController extends Controller
             ->with('record', Consulta::findOrFail($id))
             ->with('alumnos', Alumno::all('no_control'))
             ->with('medicos', Medico::all('cedula', 'nombre'))
-            ->with('medicamentos', Medicamento::all('cod_m', 'nombre'));
+            ->with('medicamentos', Medicamento::where('cantidad', '>', '0')
+                ->orWhere('nombre', Consulta::find($id)->cod_m)
+                ->select('nombre')->get());
     }
 
     /**
@@ -107,7 +113,11 @@ class ConsultaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateForm($request);
+
         $consulta = Consulta::find($id);
+        $this->consumeMedicamento($request['Cod_M']);
+        $this->addMedicamento($consulta->cod_m);
 
         $consulta->no_control = $request['No_Control'];
         $consulta->cedula = $request['Cedula'];
@@ -139,5 +149,31 @@ class ConsultaController extends Controller
         }
 
         return redirect('/consultas');
+    }
+
+    private function consumeMedicamento($id) {
+        $medicamento = Medicamento::find($id);
+
+        $medicamento->cantidad -= 1;
+
+        $medicamento->save();
+    }
+
+    private function addMedicamento($id) {
+        $medicamento = Medicamento::find($id);
+
+        $medicamento->cantidad += 1;
+
+        $medicamento->save();
+    }
+
+    private function validateForm($request) {
+        $request->validate([
+            'No_Control' => 'string|required',
+            'Cedula' => 'numeric|required',
+            'Fecha_consulta' => 'date|required',
+            'Descripcion' => 'string',
+            'Cod_M' => 'string'
+        ]);
     }
 }

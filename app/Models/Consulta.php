@@ -13,5 +13,12 @@ class Consulta extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['no_consulta', 'no_control', 'cedula', 'fecha_consulta', 'descripcion', 'cod_m'];
+    protected $fillable = [
+        'no_consulta',
+        'no_control',
+        'cedula',
+        'fecha_consulta',
+        'descripcion',
+        'cod_m'
+    ];
 }

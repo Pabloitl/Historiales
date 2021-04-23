@@ -9,9 +9,14 @@ class Medicamento extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'cod_m';
+    protected $primaryKey = 'nombre';
+
+    protected $keyType = 'string';
 
     public $timestamps = false;
 
-    protected $fillable = ['cod_m', 'nombre'];
+    protected $fillable = [
+        'nombre',
+        'cantidad'
+    ];
 }

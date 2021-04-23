@@ -19,7 +19,7 @@ class Roles extends Seeder
         Role::create(['name' => 'Administrador']);
 
         Permission::create(['name' => 'manipular alumnos'])->syncRoles(['Administrador', 'Medico']);
-        Permission::create(['name' => 'manipular medicamentos'])->assignRole('Medico');
+        Permission::create(['name' => 'manipular medicamentos'])->syncRoles(['Medico', 'Administrador']);
         Permission::create(['name' => 'manipular medicos'])->assignRole('Administrador');
         Permission::create(['name' => 'manipular consultas'])->assignRole('Medico');
         Permission::create(['name' => 'ver reportes'])->assignRole('Administrador');

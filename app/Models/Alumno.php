@@ -11,7 +11,14 @@ class Alumno extends Model
 
     protected $primaryKey = 'no_control';
 
+    protected $keyType = 'string';
+
     public $timestamps = false;
 
-    protected $fillable = ['no_control', 'nombre', 'sexo', 'carrera'];
+    protected $fillable = [
+        'no_control',
+        'nombre',
+        'sexo',
+        'carrera'
+    ];
 }

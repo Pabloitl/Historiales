@@ -14,8 +14,8 @@ class CreateMedicamentosTable extends Migration
     public function up()
     {
         Schema::create('medicamentos', function (Blueprint $table) {
-            $table->unsignedInteger('cod_m')->primary();
-            $table->string('nombre', 40);
+            $table->string('nombre')->primary();
+            $table->unsignedInteger('cantidad');
         });
     }
 

@@ -5,6 +5,15 @@
 
     <div style="text-align: center;">
         <div style="width: 50%; display: inline-block;">
+            @if ($errors->any())
+                <div class="alert alert-danger" style="text-align: left;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <form action="{{ url('medicos/' . ($record['cedula'] ?? '')) }}" method="POST">
         @if (isset($record))
             @method('PATCH')

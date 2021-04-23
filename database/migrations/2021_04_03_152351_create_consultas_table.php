@@ -14,16 +14,16 @@ class CreateConsultasTable extends Migration
     public function up()
     {
         Schema::create('consultas', function (Blueprint $table) {
-            $table->increments('no_consulta');
-            $table->unsignedInteger('no_control');
-            $table->unsignedInteger('cedula');
+            $table->id('no_consulta');
+            $table->string('no_control');
+            $table->unsignedBigInteger('cedula');
             $table->date('fecha_consulta');
-            $table->string('descripcion', 120);
-            $table->unsignedInteger('cod_m');
+            $table->string('descripcion');
+            $table->string('cod_m');
 
             $table->foreign('no_control')->references('no_control')->on('alumnos');
             $table->foreign('cedula')->references('cedula')->on('medicos');
-            $table->foreign('cod_m')->references('cod_m')->on('medicamentos');
+            $table->foreign('cod_m')->references('nombre')->on('medicamentos');
         });
     }
 

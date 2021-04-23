@@ -46,10 +46,12 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateForm($request);
         try {
             Medicamento::create([
                 'cod_m' => $request['Cod_M'],
                 'nombre' => $request['Nombre'],
+                'cantidad' => $request['Cantidad']
             ]);
         } catch (Exception $e) {
             return View::make('error')->with('error', $e->getMessage());
@@ -91,10 +93,11 @@ class MedicamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateFormUpdate($request);
         $medicamento = Medicamento::find($id);
 
-        $medicamento->cod_m = $request['Cod_M'];
         $medicamento->nombre = $request['Nombre'];
+        $medicamento->cantidad = $request['Cantidad'];
 
         try {
             $medicamento->save();
@@ -120,5 +123,19 @@ class MedicamentoController extends Controller
         }
 
         return redirect('/medicamentos');
+    }
+
+    private function validateForm($request) {
+        $request->validate([
+            'Nombre' => 'string|required|unique:medicamentos',
+            'Cantidad' => 'numeric|required|min:0',
+        ]);
+    }
+
+    private function validateFormUpdate($request) {
+        $request->validate([
+            'Nombre' => 'string|required',
+            'Cantidad' => 'numeric|required|min:0',
+        ]);
     }
 }

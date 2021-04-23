@@ -46,6 +46,7 @@ class MedicoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validateForm($request);
         try {
             Medico::create([
                 'cedula' => $request['Cedula'],
@@ -92,6 +93,7 @@ class MedicoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validateFormUpdate($request);
         $medico = Medico::find($id);
 
         $medico->cedula = $request['Cedula'];
@@ -122,5 +124,21 @@ class MedicoController extends Controller
         }
 
         return redirect('/medicos');
+    }
+
+    private function validateForm($request) {
+        $request->validate([
+            'Cedula' => 'numiric|required|unique:medicos',
+            'Nombre' => 'string|required',
+            'Campus' => 'numeric|required',
+        ]);
+    }
+
+    private function validateFormUpdate($request) {
+        $request->validate([
+            'Cedula' => 'numiric|required',
+            'Nombre' => 'string|required',
+            'Campus' => 'numeric|required',
+        ]);
     }
 }

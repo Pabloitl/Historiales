@@ -14,9 +14,9 @@ class CreateMedicosTable extends Migration
     public function up()
     {
         Schema::create('medicos', function (Blueprint $table) {
-            $table->unsignedInteger('cedula')->primary();
+            $table->id('cedula');
             $table->string('nombre');
-            $table->integer('campus');
+            $table->unsignedTinyInteger('campus');
         });
     }
 
