@@ -125,6 +125,25 @@ class MedicamentoController extends Controller
         return redirect('/medicamentos');
     }
 
+    public function search() {
+        return View::make('medicamento.search');
+    }
+
+    public function filter(Request $request)
+    {
+        $model = new Medicamento();
+
+        $query = Medicamento::select($model->getFillable());
+        foreach ($model->getFillable() as $field) {
+            if (isset($request[$field]) && $request[$field]) {
+                $query->where($field, $request[$field]);
+            }
+        }
+
+        return View::make('medicamento.lista')
+            ->with('records', $query->get());
+    }
+
     private function validateForm($request) {
         $request->validate([
             'Nombre' => 'string|required|unique:medicamentos',

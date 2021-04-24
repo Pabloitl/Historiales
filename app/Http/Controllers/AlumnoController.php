@@ -129,6 +129,25 @@ class AlumnoController extends Controller
         return redirect('/alumnos');
     }
 
+    public function search() {
+        return View::make('alumno.search');
+    }
+
+    public function filter(Request $request)
+    {
+        $model = new Alumno();
+
+        $query = Alumno::select($model->getFillable());
+        foreach ($model->getFillable() as $field) {
+            if (isset($request[$field]) && $request[$field]) {
+                $query->where($field, $request[$field]);
+            }
+        }
+
+        return View::make('alumno.lista')
+            ->with('records', $query->get());
+    }
+
     private function validateForm($request) {
         $request->validate([
             'No_Control' => 'string|required|unique:alumnos',

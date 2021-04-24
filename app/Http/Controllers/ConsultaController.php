@@ -151,6 +151,25 @@ class ConsultaController extends Controller
         return redirect('/consultas');
     }
 
+    public function search() {
+        return View::make('consulta.search');
+    }
+
+    public function filter(Request $request)
+    {
+        $model = new Consulta();
+
+        $query = Consulta::select($model->getFillable());
+        foreach ($model->getFillable() as $field) {
+            if (isset($request[$field]) && $request[$field]) {
+                $query->where($field, $request[$field]);
+            }
+        }
+
+        return View::make('consulta.lista')
+            ->with('records', $query->get());
+    }
+
     private function consumeMedicamento($id) {
         $medicamento = Medicamento::find($id);
 

@@ -29,6 +29,23 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/alumnos/search', [AlumnoController::class, 'search'])
+        ->name('alumnos.search');
+    Route::get('/medicamentos/search', [MedicamentoController::class, 'search'])
+        ->name('medicamentos.search');
+    Route::get('/medicos/search', [MedicoController::class, 'search'])
+        ->name('medicos.search');
+    Route::get('/consultas/search', [ConsultaController::class, 'search'])
+        ->name('consultas.search');
+    Route::post('/alumnos/search', [AlumnoController::class, 'filter'])
+        ->name('alumnos.search');
+    Route::post('/medicamentos/search', [MedicamentoController::class, 'filter'])
+        ->name('medicamentos.search');
+    Route::post('/medicos/search', [MedicoController::class, 'filter'])
+        ->name('medicos.search');
+    Route::post('/consultas/search', [ConsultaController::class, 'filter'])
+        ->name('consultas.search');
+
     Route::resources([
         'alumnos' => AlumnoController::class,
         'medicamentos' => MedicamentoController::class,

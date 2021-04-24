@@ -4,6 +4,7 @@
     <h2 class="text-center">Lista Médicos</h2>
 
     <div style="text-align: center;" class="mb-3">
+        <a href="{{ route('medicos.search') }}"><button class="btn btn-info"><i class="fas fa-search"></i></button></a>
         <div style="width: 40%; display: inline-block;">
             <a href="{{ route('medicos.create') }}"><button class="btn btn-primary btn-block">Nuevo</button></a>
         </div>

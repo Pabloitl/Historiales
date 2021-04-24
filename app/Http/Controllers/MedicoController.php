@@ -126,6 +126,25 @@ class MedicoController extends Controller
         return redirect('/medicos');
     }
 
+    public function search() {
+        return View::make('medico.search');
+    }
+
+    public function filter(Request $request)
+    {
+        $model = new Medico();
+
+        $query = Medico::select($model->getFillable());
+        foreach ($model->getFillable() as $field) {
+            if (isset($request[$field]) && $request[$field]) {
+                $query->where($field, $request[$field]);
+            }
+        }
+
+        return View::make('medico.lista')
+            ->with('records', $query->get());
+    }
+
     private function validateForm($request) {
         $request->validate([
             'Cedula' => 'numiric|required|unique:medicos',
