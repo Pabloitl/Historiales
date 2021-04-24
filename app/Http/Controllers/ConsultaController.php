@@ -9,6 +9,7 @@ use App\Models\Medico;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class ConsultaController extends Controller
@@ -55,18 +56,20 @@ class ConsultaController extends Controller
     {
         $this->validateForm($request);
 
-        $this->consumeMedicamento($request['Cod_M']);
-        try {
-            Consulta::create([
-                'no_control' => $request['No_Control'],
-                'cedula' => $request['Cedula'],
-                'fecha_consulta' => $request['Fecha_consulta'],
-                'descripcion' => $request['Descripcion'],
-                'cod_m' => $request['Cod_M']
-            ]);
-        } catch (Exception $e) {
-            return View::make('error')->with('error', $e->getMessage());
-        }
+        DB::transaction(function () use ($request) {
+            $this->consumeMedicamento($request['Cod_M']);
+            try {
+                Consulta::create([
+                    'no_control' => $request['No_Control'],
+                    'cedula' => $request['Cedula'],
+                    'fecha_consulta' => $request['Fecha_consulta'],
+                    'descripcion' => $request['Descripcion'],
+                    'cod_m' => $request['Cod_M']
+                ]);
+            } catch (Exception $e) {
+                return View::make('error')->with('error', $e->getMessage());
+            }
+        });
 
         return redirect('/consultas');
     }
@@ -115,21 +118,23 @@ class ConsultaController extends Controller
     {
         $this->validateForm($request);
 
-        $consulta = Consulta::find($id);
-        $this->consumeMedicamento($request['Cod_M']);
-        $this->addMedicamento($consulta->cod_m);
+        DB::transaction(function () use ($request, $id) {
+            $consulta = Consulta::find($id);
+            $this->consumeMedicamento($request['Cod_M']);
+            $this->addMedicamento($consulta->cod_m);
 
-        $consulta->no_control = $request['No_Control'];
-        $consulta->cedula = $request['Cedula'];
-        $consulta->fecha_consulta = $request['Fecha_consulta'];
-        $consulta->descripcion = $request['Descripcion'];
-        $consulta->cod_m = $request['Cod_M'];
+            $consulta->no_control = $request['No_Control'];
+            $consulta->cedula = $request['Cedula'];
+            $consulta->fecha_consulta = $request['Fecha_consulta'];
+            $consulta->descripcion = $request['Descripcion'];
+            $consulta->cod_m = $request['Cod_M'];
 
-        try {
-            $consulta->save();
-        } catch (Exception $e) {
-            return View::make('error')->with('error', $e->getMessage());
-        }
+            try {
+                $consulta->save();
+            } catch (Exception $e) {
+                return View::make('error')->with('error', $e->getMessage());
+            }
+        });
 
         return redirect('/consultas');
     }
