@@ -26,7 +26,7 @@ class ReporteController extends Controller
     {
         $result = Consulta::select('medicamentos.nombre', DB::raw('COUNT(*) AS cuenta'))
             ->join('medicamentos', 'consultas.cod_m', '=' , 'medicamentos.nombre')
-            /* ->whereBetween('fecha_consulta', [$request->fecha_inicio, $request->fecha_final]) */
+            ->whereBetween('fecha_consulta', [$request->fecha_inicial, $request->fecha_final])
             ->groupBy('medicamentos.nombre')->get();
 
         $data = [
