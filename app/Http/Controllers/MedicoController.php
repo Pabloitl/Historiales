@@ -147,17 +147,17 @@ class MedicoController extends Controller
 
     private function validateForm($request) {
         $request->validate([
-            'Cedula' => 'numiric|required|unique:medicos',
+            'Cedula' => 'numeric|required|unique:medicos',
             'Nombre' => 'string|required',
-            'Campus' => 'numeric|required',
+            'Campus' => 'numeric|required|max:100',
         ]);
     }
 
     private function validateFormUpdate($request) {
         $request->validate([
-            'Cedula' => 'numiric|required',
+            'Cedula' => 'numeric|required',
             'Nombre' => 'string|required',
-            'Campus' => 'numeric|required',
+            'Campus' => 'numeric|required|max:100',
         ]);
     }
 }
