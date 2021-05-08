@@ -25,7 +25,7 @@ class MedicoController extends Controller
     public function index()
     {
         return View::make('medico.lista')
-            ->with('records', Medico::all());
+            ->with('records', Medico::paginate(10));
     }
 
     /**
@@ -142,7 +142,7 @@ class MedicoController extends Controller
         }
 
         return View::make('medico.lista')
-            ->with('records', $query->get());
+            ->with('records', $query->paginate(10));
     }
 
     private function validateForm($request) {

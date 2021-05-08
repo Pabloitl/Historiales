@@ -30,7 +30,7 @@ class ConsultaController extends Controller
     public function index()
     {
         return View::make('consulta.lista')
-            ->with('records', Consulta::all());
+            ->with('records', Consulta::paginate(10));
     }
 
     /**
@@ -172,7 +172,7 @@ class ConsultaController extends Controller
         }
 
         return View::make('consulta.lista')
-            ->with('records', $query->get());
+            ->with('records', $query->paginate(10));
     }
 
     private function consumeMedicamento($id) {

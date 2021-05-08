@@ -25,7 +25,7 @@ class MedicamentoController extends Controller
     public function index()
     {
         return View::make('medicamento.lista')
-            ->with('records', Medicamento::all());
+            ->with('records', Medicamento::paginate(10));
     }
 
     /**
@@ -141,7 +141,7 @@ class MedicamentoController extends Controller
         }
 
         return View::make('medicamento.lista')
-            ->with('records', $query->get());
+            ->with('records', $query->paginate(10));
     }
 
     private function validateForm($request) {

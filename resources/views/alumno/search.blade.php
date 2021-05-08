@@ -5,7 +5,7 @@
 
     <div style="text-align: center;">
         <div style="width: 50%; display: inline-block;">
-            <form action="{{ route('alumnos.search') }}" method="POST">
+            <form action="{{ route('alumnos.filter') }}" method="GET">
                 @csrf
 
                 <div class="form-group">

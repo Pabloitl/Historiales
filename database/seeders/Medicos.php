@@ -20,6 +20,6 @@ class Medicos extends Seeder
             'campus' => 1
         ]);
 
-        Medico::factory()->count(5)->create();
+        Medico::factory()->count(50)->create();
     }
 }

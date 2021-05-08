@@ -14,6 +14,6 @@ class Alumnos extends Seeder
      */
     public function run()
     {
-        Alumno::factory()->count(5)->create();
+        Alumno::factory()->count(50)->create();
     }
 }

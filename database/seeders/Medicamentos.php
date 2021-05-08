@@ -14,6 +14,6 @@ class Medicamentos extends Seeder
      */
     public function run()
     {
-        Medicamento::factory()->count(5)->create();
+        Medicamento::factory()->count(25)->create();
     }
 }

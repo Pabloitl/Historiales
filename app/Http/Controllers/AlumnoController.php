@@ -25,7 +25,7 @@ class AlumnoController extends Controller
     public function index()
     {
         return View::make('alumno.lista')
-            ->with('records', Alumno::all());
+            ->with('records', Alumno::paginate(10));
     }
 
     /**
@@ -145,7 +145,7 @@ class AlumnoController extends Controller
         }
 
         return View::make('alumno.lista')
-            ->with('records', $query->get());
+            ->with('records', $query->paginate(10));
     }
 
     private function validateForm($request) {

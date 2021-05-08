@@ -26,11 +26,11 @@ class Users extends Seeder
             'password' => bcrypt('password')
         ])->assignRole('Administrador');
 
-        User::factory()->count(2)->create()->each(function ($user) {
+        User::factory()->count(25)->create()->each(function ($user) {
             $user->assignRole('Administrador');
         });
 
-        User::factory()->count(2)->create()->each(function ($user) {
+        User::factory()->count(25)->create()->each(function ($user) {
             $user->assignRole('Medico');
         });
     }

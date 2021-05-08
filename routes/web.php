@@ -37,14 +37,14 @@ Route::middleware('auth')->group(function () {
         ->name('medicos.search');
     Route::get('/consultas/search', [ConsultaController::class, 'search'])
         ->name('consultas.search');
-    Route::post('/alumnos/search', [AlumnoController::class, 'filter'])
-        ->name('alumnos.search');
-    Route::post('/medicamentos/search', [MedicamentoController::class, 'filter'])
-        ->name('medicamentos.search');
-    Route::post('/medicos/search', [MedicoController::class, 'filter'])
-        ->name('medicos.search');
-    Route::post('/consultas/search', [ConsultaController::class, 'filter'])
-        ->name('consultas.search');
+    Route::get('/alumnos/filter', [AlumnoController::class, 'filter'])
+        ->name('alumnos.filter');
+    Route::get('/medicamentos/filter', [MedicamentoController::class, 'filter'])
+        ->name('medicamentos.filter');
+    Route::get('/medicos/filter', [MedicoController::class, 'filter'])
+        ->name('medicos.filter');
+    Route::get('/consultas/filter', [ConsultaController::class, 'filter'])
+        ->name('consultas.filter');
 
     Route::resources([
         'alumnos' => AlumnoController::class,

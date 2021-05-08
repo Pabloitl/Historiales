@@ -28,6 +28,13 @@
                     </tr>
                 @endforeach
             </table>
+
+            <div class="d-flex">
+                <div class="mx-auto">
+                    {{ $records->appends(Request::except('page'))->links() }}
+                </div>
+            </div>
         </div>
     </div>
+
 @endsection
